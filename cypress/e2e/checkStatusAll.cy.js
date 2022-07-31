@@ -1,0 +1,50 @@
+ /// <reference types="Cypress" />
+ import { checkStatusInfo } from "../support/pages/checkStatusInfo"
+
+ 
+describe('check status', () => {
+    it('checkStatusAll', () => {
+
+      checkStatusInfo.visitSite('https://fstravel.com')
+      checkStatusInfo.changeView(1980,1250)
+      checkStatusInfo.closePopup()
+      checkStatusInfo.timeWait(1000)
+      checkStatusInfo.checkStatusFromFooter()
+      checkStatusInfo.inputBadOrderNumber(111111)
+      checkStatusInfo.inputBadPassportNumber(111111)
+      checkStatusInfo.checkOrderStatusButton()
+      checkStatusInfo.checkBadErrorCode(111111)
+      checkStatusInfo.clearOrderNumber(111111)
+      checkStatusInfo.inputValidationOrderNumber(1)
+      checkStatusInfo.checkValidationErrorCodeNumber()
+      checkStatusInfo.clearOrderNumber(1)
+      checkStatusInfo.inputInvalidOrderNumber(6333566)
+      checkStatusInfo.clearPassportNumber(111111)
+      checkStatusInfo.inputInvalidPassportNumber(2)
+      checkStatusInfo.checkValidationErrorCodePassport()
+      checkStatusInfo.clearPassportNumber(2)
+      checkStatusInfo.inputInvalidPassportNumber(1234567)
+      checkStatusInfo.checkOrderStatusButton()
+      checkStatusInfo.checkInvalidPassportErrorCode()
+      checkStatusInfo.clearPassportNumber(1234567)
+      checkStatusInfo.inputCancelledPassportNumber(123456)
+      checkStatusInfo.checkOrderStatusButton()
+      checkStatusInfo.timeWait(1000)
+      checkStatusInfo.showDocuments()
+      checkStatusInfo.checkTouristContract()
+      checkStatusInfo.checkStatusFromHeader()
+      checkStatusInfo.checkPageName()
+      checkStatusInfo.inputValidOrdertNumber(6337109)
+      checkStatusInfo.inputValidPassportNumber(432909)
+      checkStatusInfo.checkOrderStatusButton()
+      checkStatusInfo.checkPageContent()
+      checkStatusInfo.showDocuments()
+      checkStatusInfo.documentsCheck()
+      checkStatusInfo.touristsPageButton()
+      checkStatusInfo.touristsPageChecks()
+      checkStatusInfo.tarifPageButton()
+      checkStatusInfo.tarifPageCheck()
+
+    })
+    
+})
