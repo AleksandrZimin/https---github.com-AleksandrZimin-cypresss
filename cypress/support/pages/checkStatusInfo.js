@@ -17,27 +17,27 @@ export class CheckStatusInfo {
     }
 
     checkStatusFromFooter(){
-        cy.get(':nth-child(2) > .block > :nth-child(6) > .v-text-16')   
+        cy.get(':nth-child(2) > .block > :nth-child(5) > .v-text-16')
         .scrollIntoView()
         .should('be.visible')
         .click()
     }
 
-    inputBadOrderNumber(orderNumber){
+    inputOrderNumber(orderNumber){
         cy.get(':nth-child(1) > .v-input__wrap > input')                     
         .type(orderNumber)
         .should('have.value', orderNumber)
         .blur()
     }
 
-    inputBadPassportNumber(passportNumber){
+    inputPassportNumber(passportNumber){
         cy.get(':nth-child(3) > .v-input__wrap > input')                     
         .type(passportNumber)
         .should('have.value', passportNumber)
         .blur()
     }
 
-    checkOrderStatusButton(){
+    clickOrderStatusButton(){
         cy.get('.v-text')                                                   
         .click()
     }
@@ -52,6 +52,11 @@ export class CheckStatusInfo {
         .clear(orderNumber)
     }
 
+    clearPassportNumber(passportNumber){
+        cy.get(':nth-child(3) > .v-input__wrap > input')
+        .clear(passportNumber)
+    }
+
     inputValidationOrderNumber(orderNumber){
         cy.get(':nth-child(1) > .v-input__wrap > input') 
         .type(orderNumber)
@@ -64,25 +69,6 @@ export class CheckStatusInfo {
         .contains('Поле должно содержать от 3 до 10 символов')
     }
 
-    inputInvalidOrderNumber(orderNumber){
-        cy.get(':nth-child(1) > .v-input__wrap > input')                     
-        .type(orderNumber)
-        .should('have.value', orderNumber)
-        .blur()
-    }
-
-    clearPassportNumber(passportNumber){
-        cy.get(':nth-child(3) > .v-input__wrap > input')
-        .clear(passportNumber)
-    }
-
-    inputInvalidPassportNumber(passportNumber){
-        cy.get(':nth-child(3) > .v-input__wrap > input') 
-        .type(passportNumber)
-        .should('have.value', passportNumber)
-        .blur()
-    }
-
     checkValidationErrorCodePassport(){
         cy.get(':nth-child(3) > .v-input__message')                                
         .contains('Поле должно содержать от 5 до 10 символов')
@@ -91,13 +77,6 @@ export class CheckStatusInfo {
     checkInvalidPassportErrorCode(){
         cy.get('.red')                                                       
         .contains('Не корректный номер паспорта')
-    }
-
-    inputCancelledPassportNumber(passportNumber){
-        cy.get(':nth-child(3) > .v-input__wrap > input') 
-        .type(passportNumber)
-        .should('have.value', passportNumber)
-        .blur()
     }
 
     checkCanselledErrors(){
@@ -119,7 +98,7 @@ export class CheckStatusInfo {
         cy.get('.v-header-nav > :nth-child(3) > span')                       
         .click()
 
-        cy.get('[data-v-45d70fe4]')                                        
+        cy.get('#app > div > header > div:nth-child(1) > div.v-header-block > div.v-header-container > div > div:nth-child(4) > div > div:nth-child(3) > a')                                        
         .contains('Проверить статус путёвки')
         .click()
     }
@@ -129,28 +108,17 @@ export class CheckStatusInfo {
         .should('contain.text', 'ПРОВЕРКА СТАТУСА ЗАКАЗА')
     }
 
-    inputValidOrdertNumber(orderNumber){
-        cy.get(':nth-child(1) > .v-input__wrap > input') 
-        .type(orderNumber)
-        .should('have.value', orderNumber)
-        .blur()
-    }
-
-    inputValidPassportNumber(passportNumber){
-        cy.get(':nth-child(3) > .v-input__wrap > input') 
-        .type(passportNumber)
-        .should('have.value', passportNumber)
-        .blur()
-    }
-
-    checkPageContent(){
+    checkPageContent(orderNumber){
         cy.get('h2.v-text-4')                                              
-        .contains('6337109')
+        .contains(orderNumber)
     }
 
     documentsCheck(){
         cy.get(':nth-child(2) > .col-md-3')                                  
         .contains('Памятка туристу')
+
+        cy.get('#app > div > div.container.v-mt-4 > div.v-mb-5 > div > div:nth-child(3) > div.col-md-3.v-text-3.v-dark')                                  
+        .contains('Справка о стоимости авиабилета')
 
         cy.get('.col-md-3 > span')
         .contains('Подтверждение для туриста')
@@ -207,14 +175,104 @@ export class CheckStatusInfo {
         .click()
     }
 
+    agentLogin() {
+        cy.get('.v-account-block > .v-icon-user-14')
+        .click()
+
+        cy.get('.form__status > :nth-child(2)')
+        .click()
+
+        cy.get('#email')
+        .click()
+
+        cy.get('#email')
+        .type('testfs111@yandex.ru')
+
+        cy.get('#password')
+        .type('Zimin1993!')
+
+        cy.get('.form > :nth-child(5)')
+        .click()
+
+        .wait(1000)
+        
+        cy.get('.v-account-block > .v-icon-user-14')
+        .click()
+
+        cy.get('#app > div > header > div > div.v-header-block > div > div > div.v-header-right > div > div.account > div.account__auth > div > div > ul > li:nth-child(1) > a')
+        .click()
+
+        cy.get('#login')
+        .click()
+        .type('testfs111@yandex.ru')
+
+        cy.get('#passwd')
+        .click()
+        .type('Zimin1993!')
+
+        cy.get('#loginForm > div:nth-child(8) > button')
+        .click()
+    }
+
+    agentCheckStatus() {
+        cy.get('#header > nav > ul > li:nth-child(4) > ul > li:nth-child(2) > a')
+        .click()
+    }
+
+    clickCheckButton() {
+        cy.get('#check_confirm > div.container > button')
+        .click()
+    }
+
+    validationAgentCheckStatus() {
+        cy.get('#notify-container > div > div > span.notify-text')
+        .contains('Не указан номер заявки')
+    }
+
+    inputAgentOrderNumber(orderNumber) {
+        cy.get('#check_confirm > div.container > input')
+        .type(orderNumber)
+    }
+
+    clearAgentOrderNumber(orderNumber) {
+        cy.get('#check_confirm > div.container > input')
+        .type(orderNumber)
+    }
+
+    validationAgentCheckNoValidStatus() {
+        cy.get('#modalContainer > div.modalTitle')
+        .contains('Информация о заявке Заявка не найдена')
+    }
+
+    closeAgentValidationPopup() {
+        cy.get('#modalContainer > div.modalTitle > a')
+        .click()
+    }    
+
+    validationAgentCheckNoValidStatus() {
+        cy.get('#modalContainer > div.modalTitle')
+        .contains('Информация о заявке')
+    }
+
+    checkAgentNumberStatusPopup(orderNumber) {
+        cy.get('#basicModalContent > div > table > thead > tr > th > b')
+        .contains(orderNumber)
+    }
+
+    checkAgentOrderStatusPopup() {
+        cy.get('#basicModalContent > div > table > tbody > tr:nth-child(1) > td:nth-child(2) > span')
+        .contains('Подтверждена')
+    }
+
+    checkAgentPayStatusPopup() {
+        cy.get('#basicModalContent > div > table > tbody > tr.odd > td:nth-child(2)')
+        .contains('Оплачена')
+    }
     
-
-
-   
-
-
-
-
+    checkAgentDocumentStatusPopup() {
+        cy.get('#basicModalContent > div > table > tbody > tr:nth-child(3) > td:nth-child(2) > b')
+        .contains('	НЕ ГОТОВЫ К ВЫДАЧЕ')
+    }
 }
 
 export const checkStatusInfo = new CheckStatusInfo()

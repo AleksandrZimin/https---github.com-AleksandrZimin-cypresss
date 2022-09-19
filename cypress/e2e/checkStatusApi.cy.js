@@ -1,10 +1,10 @@
- /// <reference types="Cypress" />
- import { checkStatusInfo } from "../support/pages/checkStatusInfo"
+/// <reference types="Cypress" />
+import { checkStatusInfo } from "../support/pages/checkStatusInfo"
 
  
 describe('check status', () => {
     it('Вход на сайт', () => {
-      checkStatusInfo.visitSite('https://prerelease.fstravel.com')
+      checkStatusInfo.visitSite('https://prerelease.fstravel.com/statuscheck')
     }),
 
     it('Изменение размера окна', () => {
@@ -17,10 +17,6 @@ describe('check status', () => {
 
     it('Хардкодный таймаут', () => {
       checkStatusInfo.timeWait(1000)
-    }),
-
-    it('Переход на страницу проверки статуса заказа через подвал сайта', () => {
-      checkStatusInfo.checkStatusFromFooter()
     }),
 
     it('Ввод несуществующих данных в поле "Номер заказа"', () => {
@@ -119,8 +115,8 @@ describe('check status', () => {
       checkStatusInfo.checkTouristContract()
     }),
 
-    it('Переход на страницу проверки статуса заказа через шапку сайта', () => {
-      checkStatusInfo.checkStatusFromHeader()
+    it('Вход на сайт', () => {
+      checkStatusInfo.visitSite('https://prerelease.fstravel.com/statuscheck')
     }),
 
     it('Проверка названия страницы', () => {
